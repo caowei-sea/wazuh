@@ -51,6 +51,17 @@ bool wdb_agents_find_package(wdb_t *wdb, const char* reference);
 bool wdb_agents_find_cve(wdb_t *wdb, const char* cve, const char* reference);
 
 /**
+ * @brief Function to check if a certain package and cve exists in the DB by status.
+ *
+ * @param [in] wdb The 'agents' struct database.
+ * @param [in] cve The CVE id of the vulnerability.
+ * @param [in] name The package reference.
+ * @param [in] status The package reference.
+ * @return Returns TRUE if found, FALSE if not or error.
+ */
+bool wdb_agents_find_cve_package(wdb_t *wdb, const char* cve, const char* name, const char* status);
+
+/**
  * @brief Function to insert a new entry into the agent vuln_cves table.
  *
  * @param [in] wdb The 'agents' struct database.
