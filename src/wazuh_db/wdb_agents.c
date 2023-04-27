@@ -81,6 +81,28 @@ bool wdb_agents_find_cve(wdb_t *wdb, const char* cve, const char* reference){
     }
 }
 
+bool wdb_agents_find_cve_package(wdb_t *wdb, const char* cve, const char* name, const char* status){
+    sqlite3_stmt* stmt = wdb_init_stmt_in_cache(wdb, WDB_STMT_VULN_CVES_FIND_CVE_BY_STATUS);
+
+    if (stmt == NULL) {
+        return FALSE;
+    }
+
+    sqlite3_bind_text(stmt, 1, cve, -1, NULL);
+    sqlite3_bind_text(stmt, 2, reference, -1, NULL);
+    sqlite3_bind_text(stmt, 2, status, -1, NULL);
+
+    switch (sqlite3_step(stmt)) {
+    case SQLITE_ROW:
+        return TRUE;
+    case SQLITE_DONE:
+        return FALSE;
+    default:
+        mdebug1("DB(%s) sqlite3_step(): %s", wdb->id, sqlite3_errmsg(wdb->db));
+        return FALSE;
+    }
+}
+
 cJSON* wdb_agents_insert_vuln_cves(wdb_t *wdb,
                                    const char* name,
                                    const char* version,
