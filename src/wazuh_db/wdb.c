@@ -280,6 +280,7 @@ static const char *SQL_STMT[] = {
     [WDB_STMT_VULN_CVES_UPDATE_BY_TYPE] = "UPDATE vuln_cves SET status = ? WHERE type = ?;",
     [WDB_STMT_VULN_CVES_UPDATE_ALL] = "UPDATE vuln_cves SET status = ?",
     [WDB_STMT_VULN_CVES_FIND_CVE] = "SELECT 1 FROM vuln_cves WHERE cve = ? AND reference = ?;",
+    [WDB_STMT_VULN_CVES_FIND_CVE_BY_STATUS] = "SELECT 1 FROM vuln_cves WHERE cve = ? AND name = ? AND status = ?;",
     [WDB_STMT_VULN_CVES_SELECT_BY_STATUS] = "SELECT * FROM vuln_cves WHERE status = ?;",
     [WDB_STMT_VULN_CVES_DELETE_ENTRY] = "DELETE FROM vuln_cves WHERE cve = ? AND reference = ?;",
     [WDB_STMT_SYS_HOTFIXES_GET] = "SELECT HOTFIX FROM SYS_HOTFIXES;",
