@@ -185,8 +185,13 @@ namespace PackageLinuxHelper
         }
 
         if (info.contains("install-date"))
-        {
-            install_time = info.at("install-date");
+        {   
+            struct std::tm tm;
+            std::istringstream ss(static_cast<std::string>(info.at("install-date")));
+            ss >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
+            std::ostringstream oss;
+            oss << std::put_time(&tm, "%Y/%m/%d %H:%M:%S");
+            install_time = oss.str();
         }
 
         if (info.contains("summary"))
